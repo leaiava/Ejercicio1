@@ -1,15 +1,19 @@
 /*=============================================================================
  * Author: Leandro Arrieta <leandroarrieta@gmail.com>
- * Date: 2021/05/21
+ * 		   Jonathan Cagua <jonathan.cagua@gmail.com>
+ * Date: 2021/06/30
  * Version: 1.0
  *===========================================================================*/
 
 /*=====[Inclusions of function dependencies]=================================*/
 
-#include "Ejercicio0.h"
+#include "Ejercicio1.h"
 #include "sapi.h"
 
 /*=====[Definition macros of private constants]==============================*/
+#define encenderLed(ledx)	gpioWrite( ledx, ON )
+#define apagarLed(ledx)		gpioWrite( ledx, OFF )
+
 
 /*=====[Definitions of extern global variables]==============================*/
 
@@ -19,9 +23,11 @@
 
 /*=====[Main function, program entry point after power on or reset]==========*/
 
+
 int main( void )
 {
-   	// ----- Setup -----------------------------------
+	//bool_t EncendioLed = 0;
+	// ----- Setup -----------------------------------
 	boardInit();
 
 
@@ -59,28 +65,28 @@ int main( void )
     	if(delayRead(&myDelay)){
 
     		if(indice == 1){
-    			gpioWrite( LEDB, ON );
-    			gpioWrite( LED1, OFF );
-    			gpioWrite( LED2, OFF );
-    			gpioWrite( LED3, OFF );
+    			encenderLed(LEDB);
+    			apagarLed(LED1);
+    			apagarLed(LED2);
+    			apagarLed(LED3);
     		}
     		if(indice == 2){
-    			gpioWrite( LEDB, OFF );
-    			gpioWrite( LED1, ON );
-    			gpioWrite( LED2, OFF );
-    			gpioWrite( LED3, OFF );
+    			apagarLed(LEDB);
+    			encenderLed(LED1);
+				apagarLed(LED2);
+				apagarLed(LED3);
     		}
     		if(indice == 3){
-    			gpioWrite( LEDB, OFF );
-    			gpioWrite( LED1, OFF );
-    			gpioWrite( LED2, ON );
-    			gpioWrite( LED3, OFF );
+    			apagarLed(LEDB);
+    			apagarLed(LED1);
+    			encenderLed(LED2);
+				apagarLed(LED3);
     		}
     		if(indice == 4){
-    			gpioWrite( LEDB, OFF );
-    			gpioWrite( LED1, OFF );
-    			gpioWrite( LED2, OFF );
-    			gpioWrite( LED3, ON );
+    			apagarLed(LEDB);
+    			apagarLed(LED1);
+    			apagarLed(LED2);
+    			encenderLed(LED3);
     		}
 
     		if( sentidoSecuencia == 0)
@@ -101,3 +107,5 @@ int main( void )
    // case of a PC program.
    return 0;
 }
+
+
