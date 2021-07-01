@@ -28,6 +28,21 @@ extern "C" {
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
 
+/* encender un led en particular */
+bool_t encenderLed( gpioMap_t ledx );
+
+/* apagar todos los leds */
+bool_t  apagarLeds();
+
+/* leer el estado de una tecla.  Devuelve por valor el estado de la tecla pulsada (verdadero) o liberada (falso)*/
+bool_t leerTecla (gpioMap_t tecla);
+
+/* Loop infinito para colgar el programa en caso de error*/
+bool_t atenderError();
+
+/* psecuencia apunta a una secuencia de leds o arreglo de gpioMap_t */
+void activarSecuencia(gpioMap_t * psecuencia);
+
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
 
 /*=====[C++ - end]===========================================================*/

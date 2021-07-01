@@ -1,0 +1,173 @@
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0004c4 00000044 t Board_LED_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000508 00000040 t Board_TEC_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000548 00000040 t Board_GPIO_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000588 00000030 t Board_ADC_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0005b8 00000038 t Board_SPI_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0005f0 00000024 t Board_I2C_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a40 00000008 t GpioButtons
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a48 0000000c t GpioLeds
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a54 00000012 t GpioPorts
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a6c 00000004 t InitClkStates
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a70 00000074 t pinmuxing
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000720 0000002c t Chip_UART_GetIndex
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001ae4 00000008 t UART_BClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001aec 00000008 t UART_PClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00087c 00000014 t Chip_ADC_GetClockIndex
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000890 00000032 t getClkDiv
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000958 000000a0 t pll_calc_divs
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0009f8 0000010c t pll_get_frac
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000b04 0000004c t Chip_Clock_FindBaseClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000d78 00000022 t Chip_Clock_GetDivRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000048 00000008 b audio_usb_pll_freq
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001b00 0000006c t periph_to_base
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001b6c 00000048 t InitClkStates
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001040 00000014 t Chip_SSP_GetClockIndex
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001054 00000018 t Chip_SSP_GetPeriphClockIndex
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000000 00000038 d i2c
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000038 00000004 d ClockSpeed
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000050 00000004 b callBackFuncParams
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000058 00000008 b tickCounter
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000060 00000004 b tickHookFunction
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001290 00000034 t gpioObtainPinInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000064 00000004 b g_hUsb
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001ca0 t __init_array_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001c9c b __preinit_array_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001c9c t __init_array_start
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001c9c b __preinit_array_start
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000b9c 0000001c T Chip_Clock_GetDividerSource
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000130 00000002 W DebugMon_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a080000 A __top_MFlashA512
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0000c0 T __section_table_start
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W I2C0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000668 00000008 T __stdio_init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0015f4 0000003e T delayRead
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000126 00000002 W HardFault_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000000 A __vectors_start__
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000936 0000000c T Chip_ADC_SetResolution
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001264 0000002c T SysTick_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SPIFI_ADCHS_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000434 00000002 W initialise_monitor_handles
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SDIO_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000132 00000002 W PendSV_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000124 00000002 W NMI_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001ca8 R __exidx_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0000fc T __data_section_table_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W UART1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:53ff75fa A __valid_user_code_checksum
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001ca8 R _etext
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W USB1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W TIMER3_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000e1a 0000000c T Chip_Clock_GetBaseClocktHz
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W UART0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000154 00000012 T bss_init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SGPIO_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001650 T __aeabi_uldivmod
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000070 ? _noinit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000068 00000004 B SystemCoreClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00074c 00000054 T Chip_UART_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W ADC0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00012c 00000002 W UsageFault_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000e98 0000004c T Chip_Clock_GetRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0006a8 0000006c T Board_SetupClocking
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:20008000 A __top_RamAHB32
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001680 000002d0 T __udivmoddi4
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a3c 00000004 T ExtRateIn
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W IntDefaultHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SSP0_SSP1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000300 T __CRP_WORD_END__
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001ca0 R __exidx_start
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0002fc 00000004 T CRP_WORD
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001954 00000048 T __libc_init_array
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W ADC1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W RIT_WDT_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W FLASH_EEPROM_ATIMER_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000638 00000030 T Board_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0004c2 00000002 W _init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0000c0 T __data_section_table
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W RTC_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000070 B _ebss
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W TIMER0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000438 00000088 T Reset_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0011e8 0000007c T tickInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:20010000 A __top_RamAHB_ETB16
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001138 00000038 T Chip_I2C_SetClockRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W LCD_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000b50 0000004c T Chip_Clock_EnableCrystal
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W M4_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10008000 A __top_RamLoc32
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000136 0000001e T data_init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001114 00000024 T Chip_I2C_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000d0c 0000006c T Chip_Clock_GetMainPLLHz
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001bb4 000000e6 T gpioPinsInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00106c 00000012 T Chip_SSP_SetClockRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000df4 00000026 T Chip_Clock_GetBaseClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000048 B _bss
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000904 00000032 T Chip_ADC_SetSampleRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0015d4 00000020 T delayInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00107e 0000003e T Chip_SSP_SetBitRate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W I2S0_I2S1_QEI_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00103c 00000002 T Chip_GPIO_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001a68 00000004 T OscRateIn
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000070 ? _end_noinit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10008000 A _vStackTop
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000124 T __bss_section_table_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0012c4 000001ac T gpioInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001950 00000002 W __aeabi_ldiv0
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001544 0000001c T USB0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SCT_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000bb8 0000001c T Chip_Clock_GetDividerDivisor
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0002fc T __CRP_WORD_START__
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00199c 000000a0 T memset
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000128 00000002 W MemManage_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000300 00000134 T main
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:2000c000 A __top_RamAHB16
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1008a000 A __top_RamLoc40
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00012e 00000002 W SVC_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000e28 0000003c T Chip_Clock_EnableOpts
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000bd4 000000b8 T Chip_Clock_GetClockInputHz
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000c8c 00000080 T Chip_Clock_CalcMainPLLValue
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001170 00000038 T SystemInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0000fc T __bss_section_table
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001470 0000006a T gpioWrite
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0004c0 00000002 W _fini
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0008c4 00000040 T Chip_ADC_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1000006c 00000004 B g_pUsbApi
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000670 00000038 T Board_SetupMuxing
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0007a0 000000dc T Chip_UART_SetBaudFDR
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0011c4 0000000c T tickRead
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000040 00000008 D tickRateMS
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W SPI_DAC_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W ETH_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000000 ? _end_uninit_RESERVED
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1b000000 T __core_m0app_START__
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W CAN0_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000000 D _data
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000070 B _pvHeapStart
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W UART2_CAN1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000124 T __section_table_end
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0010bc 00000038 T Chip_SSP_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000614 00000024 T Board_Debug_Init
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:10000048 D _edata
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0010f4 00000020 T Chip_I2C_EventHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W M0SUB_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000ee4 00000158 T Chip_SetupCoreClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000000 00000040 T g_pfnVectors
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000944 00000014 T SystemCoreClockUpdate
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W DMA_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W EVRT_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1b080000 A __top_MFlashB512
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001950 00000002 W __aeabi_idiv0
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a00012a 00000002 W BusFault_Handler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000e64 00000034 T Chip_Clock_Enable
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W UART3_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001634 0000001c T delayWrite
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W MCPWM_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0014da 00000068 T gpioRead
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a001560 00000074 T boardInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000040 00000080 T g_pfnVendorVectors
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W GINT1_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0011d0 00000018 T tickPowerSet
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000d9c 00000058 T Chip_Clock_SetBaseClock
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a0011a8 0000001c T cyclesCounterInit
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000166 00000002 W GPIO4_IRQHandler
+EjerciciosLea/Ejercicio1/out/Ejercicio1.elf:1a000714 0000000c T Board_SystemInit

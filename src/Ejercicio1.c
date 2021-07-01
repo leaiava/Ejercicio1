@@ -7,14 +7,15 @@
 
 /*=====[Inclusions of function dependencies]=================================*/
 
-#include "Ejercicio1.h"
 #include "sapi.h"
+#include "Ejercicio1.h"
+
 
 /*=====[Definition macros of private constants]==============================*/
 
-#define encenderLed(ledx)	gpioWrite( ledx, ON )
-#define apagarLeds()	{ gpioWrite( LED1, OFF ); gpioWrite( LED2, OFF ); gpioWrite( LED3, OFF ); gpioWrite( LEDB, OFF );}
-#define leerTecla(teclax)	!gpioRead( teclax )
+//#define encenderLed(ledx)	gpioWrite( ledx, ON )
+//#define apagarLeds()	{ gpioWrite( LED1, OFF ); gpioWrite( LED2, OFF ); gpioWrite( LED3, OFF ); gpioWrite( LEDB, OFF );}
+//#define leerTecla(teclax)	!gpioRead( teclax )
 
 /*=====[Definitions of extern global variables]==============================*/
 
@@ -24,19 +25,19 @@
 
 /*=====[Main function, program entry point after power on or reset]==========*/
 
+gpioMap_t secuenciaLeds[4] = { LEDB, LED1, LED2, LED3};
 
 int main( void )
 {
-	//bool_t EncendioLed = 0;
+
 	// ----- Setup -----------------------------------
 	boardInit();
 
 
-	uint8_t sentidoSecuencia = 0;
+	bool_t sentidoSecuencia = 0;
+
 		//TEC1 -> sentidoSecuencia =0 LEDA -> LED1 -> LED2 -> LED3 -> LEDA …
 		//TEC4 -> sentidoSecuencia =1 LED3 -> LED2 -> LED1 -> LEDA -> LED3 …
-
-    uint8_t ledTime = 0;
     	//TEC2 -> ledTime = 0 cada led queda encendido 150 ms.
     	//TEC3 -> ledTime = 1 cada led queda encendido 750 ms.
 
@@ -66,20 +67,28 @@ int main( void )
     	if(delayRead(&myDelay)){
 
     		if(indice == 1){
-    			apagarLeds();
-    			encenderLed(LEDB);
+    			if( !apagarLeds() )
+    				atenderError();
+    			if ( !encenderLed(LEDB) )
+    				atenderError();
     		}
     		if(indice == 2){
-    			apagarLeds();
-    			encenderLed(LED1);
+    			if( !apagarLeds() )
+					atenderError();
+				if ( !encenderLed(LED1) )
+					atenderError();
     		}
     		if(indice == 3){
-    			apagarLeds();
-    			encenderLed(LED2);
+    			if( !apagarLeds() )
+					atenderError();
+				if ( !encenderLed(LED2) )
+					atenderError();
     		}
     		if(indice == 4){
-    			apagarLeds();
-    			encenderLed(LED3);
+    			if( !apagarLeds() )
+					atenderError();
+				if ( !encenderLed(LED3) )
+					atenderError();
     		}
 
     		if( sentidoSecuencia == 0)
@@ -101,4 +110,39 @@ int main( void )
    return 0;
 }
 
+bool_t encenderLed( gpioMap_t ledx )
+{
 
+	//verifico que el led elegido sea un led válido
+	if ( !( (ledx== LED1) || (ledx== LED2) || (ledx== LED3) || (ledx== LEDB) ) )
+		return 0;
+	else
+		return gpioWrite( ledx, ON );
+}
+
+bool_t  apagarLeds()
+{
+	gpioWrite( LED1, OFF );
+	gpioWrite( LED2, OFF );
+	gpioWrite( LED3, OFF );
+	gpioWrite( LEDB, OFF );
+
+	// Leo todos los leds para verificar que están apagados. devuelve VERDADERO si estan todos apagados.
+	return !(gpioRead( LED1 )||gpioRead( LED2 )||gpioRead( LED3 )||gpioRead( LEDB ) );
+}
+
+bool_t leerTecla (gpioMap_t teclax)
+{
+	return !gpioRead( teclax );
+}
+
+bool_t atenderError()
+{
+	while(1);
+	return 0;
+}
+
+void activarSecuencia(gpioMap_t *psecuencia)
+{
+
+}
