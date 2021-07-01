@@ -14,7 +14,7 @@
 /*=====[Definition macros of private constants]==============================*/
 
 //#define encenderLed(ledx)	gpioWrite( ledx, ON )
-//#define apagarLeds()	{ gpioWrite( LED1, OFF ); gpioWrite( LED2, OFF ); gpioWrite( LED3, OFF ); gpioWrite( LEDB, OFF );}
+#define apagarLed(ledx)		gpioWrite( ledx, OFF )
 //#define leerTecla(teclax)	!gpioRead( teclax )
 
 /*=====[Definitions of extern global variables]==============================*/
@@ -122,13 +122,19 @@ bool_t encenderLed( gpioMap_t ledx )
 
 bool_t  apagarLeds()
 {
-	gpioWrite( LED1, OFF );
-	gpioWrite( LED2, OFF );
-	gpioWrite( LED3, OFF );
-	gpioWrite( LEDB, OFF );
+	bool_t resp = FALSE;
+	resp =  apagarLed( LEDB );
+	resp &= apagarLed( LED1 );
+	resp &= apagarLed( LED2 );
+	resp &= apagarLed( LED3 );
 
 	// Leo todos los leds para verificar que están apagados. devuelve VERDADERO si estan todos apagados.
-	return !(gpioRead( LED1 )||gpioRead( LED2 )||gpioRead( LED3 )||gpioRead( LEDB ) );
+	resp &= !gpioRead( LEDB );
+	resp &= !gpioRead( LED1 );
+	resp &= !gpioRead( LED2 );
+	resp &= !gpioRead( LED3 );
+
+	return(resp);
 }
 
 bool_t leerTecla (gpioMap_t teclax)
