@@ -17,6 +17,8 @@
 #define apagarLed(ledx)		gpioWrite( ledx, OFF )
 //#define leerTecla(teclax)	!gpioRead( teclax )
 
+const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
+
 /*=====[Definitions of extern global variables]==============================*/
 
 /*=====[Definitions of public global variables]==============================*/
@@ -25,7 +27,8 @@
 
 /*=====[Main function, program entry point after power on or reset]==========*/
 
-gpioMap_t secuenciaLeds[4] = { LEDB, LED1, LED2, LED3};
+
+
 
 int main( void )
 {
@@ -66,41 +69,22 @@ int main( void )
 
     	if(delayRead(&myDelay)){
 
-    		if(indice == 1){
-    			if( !apagarLeds() )
-    				atenderError();
-    			if ( !encenderLed(LEDB) )
-    				atenderError();
-    		}
-    		if(indice == 2){
-    			if( !apagarLeds() )
-					atenderError();
-				if ( !encenderLed(LED1) )
-					atenderError();
-    		}
-    		if(indice == 3){
-    			if( !apagarLeds() )
-					atenderError();
-				if ( !encenderLed(LED2) )
-					atenderError();
-    		}
-    		if(indice == 4){
-    			if( !apagarLeds() )
-					atenderError();
-				if ( !encenderLed(LED3) )
-					atenderError();
-    		}
+    		if( !apagarLeds() )
+				atenderError();
+			if ( !encenderLed( secuenciaLeds[ indice ] ) )
+				atenderError();
+
 
     		if( sentidoSecuencia == 0)
-    			indice++;
+    			if (indice >= 3)
+    				indice = 0;
+    			else
+    				indice++;
     		else
-    			indice--;
-
-    		if (indice >= 5)
-    			indice = 1;
-
-			if (indice <= 0)
-				indice = 4;
+    			if (indice <= 0)
+    				indice =3;
+    			else
+    				indice--;
     	}
    }
 
@@ -137,10 +121,14 @@ bool_t  apagarLeds()
 	return(resp);
 }
 
+
 bool_t leerTecla (gpioMap_t teclax)
 {
+	if ( !( (teclax== TEC1) || (teclax== TEC2) || (teclax== TEC3) || (teclax== TEC4) ) )
+			return 0;
 	return !gpioRead( teclax );
 }
+
 
 bool_t atenderError()
 {
@@ -148,7 +136,7 @@ bool_t atenderError()
 	return 0;
 }
 
-void activarSecuencia(gpioMap_t *psecuencia)
+void activarSecuencia(gpioMap_t * psecuencia)
 {
 
 }
