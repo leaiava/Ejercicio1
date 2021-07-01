@@ -67,11 +67,14 @@ int main( void )
     		sentidoSecuencia = 1;
     	}
 
+    	//si se cumple el tiempo seteado con delayWrite cambio la secuencia de leds
     	if(delayRead(&myDelay)){
 
     		if( !apagarLeds() )
 				atenderError();
-			if ( !encenderLed( secuenciaLeds[ indice ] ) )
+
+    		//prendo el led correspondiente al indice según la secuencia definida
+    		if ( !encenderLed( secuenciaLeds[ indice ] ) )
 				atenderError();
 
 
