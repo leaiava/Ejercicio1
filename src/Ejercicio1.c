@@ -11,9 +11,10 @@
 #include "sapi.h"
 
 /*=====[Definition macros of private constants]==============================*/
-#define encenderLed(ledx)	gpioWrite( ledx, ON )
-#define apagarLed(ledx)		gpioWrite( ledx, OFF )
 
+#define encenderLed(ledx)	gpioWrite( ledx, ON )
+#define apagarLeds()	{ gpioWrite( LED1, OFF ); gpioWrite( LED2, OFF ); gpioWrite( LED3, OFF ); gpioWrite( LEDB, OFF );}
+#define leerTecla(teclax)	!gpioRead( teclax )
 
 /*=====[Definitions of extern global variables]==============================*/
 
@@ -46,46 +47,38 @@ int main( void )
     // ----- Repeat for ever -------------------------
 
     while( true ) {
-    	if ( !gpioRead( TEC1 ) ){
+    	if ( leerTecla( TEC1 ) ){
     		sentidoSecuencia = 0;
     	}
 
-    	if ( !gpioRead( TEC2 ) ){
+    	if ( leerTecla( TEC2 ) ){
     		delayWrite( &myDelay, 150 );
     	}
 
-    	if ( !gpioRead( TEC3 ) ){
+    	if ( leerTecla( TEC3 ) ){
     		delayWrite( &myDelay, 750 );
     	}
 
-    	if ( !gpioRead( TEC4 ) ){
+    	if ( leerTecla( TEC4 ) ){
     		sentidoSecuencia = 1;
     	}
 
     	if(delayRead(&myDelay)){
 
     		if(indice == 1){
+    			apagarLeds();
     			encenderLed(LEDB);
-    			apagarLed(LED1);
-    			apagarLed(LED2);
-    			apagarLed(LED3);
     		}
     		if(indice == 2){
-    			apagarLed(LEDB);
+    			apagarLeds();
     			encenderLed(LED1);
-				apagarLed(LED2);
-				apagarLed(LED3);
     		}
     		if(indice == 3){
-    			apagarLed(LEDB);
-    			apagarLed(LED1);
+    			apagarLeds();
     			encenderLed(LED2);
-				apagarLed(LED3);
     		}
     		if(indice == 4){
-    			apagarLed(LEDB);
-    			apagarLed(LED1);
-    			apagarLed(LED2);
+    			apagarLeds();
     			encenderLed(LED3);
     		}
 
