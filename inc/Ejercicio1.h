@@ -30,7 +30,7 @@ extern "C" {
 /*=====[Definitions of public data types]====================================*/
 
 typedef struct{
-	const gpioMap_t* ptrLed;//puntero al arreglo de led
+	const gpioMap_t* ptrLed;//puntero al arreglo de leds
 	uint8_t LedEncendido;//el led encendido en la secuencia
 	uint8_t LedMax;//cantidad maxima de leds
 	bool_t SentidoSecuencia;//el sentido q va la secuencia
@@ -39,16 +39,20 @@ typedef struct{
 /*=====[Prototypes (declarations) of public functions]=======================*/
 
 /* encender un led en particular */
-bool_t led_encender( gpioMap_t ledx );
+bool_t led_encender( controlSecuencia* ptrSecuencia );
+
 /* apagar todos los leds */
 bool_t led_apagar_todos(controlSecuencia* ptrSecuencia );
+
 /* leer el estado de una tecla.  Devuelve por valor el estado de la tecla pulsada (verdadero) o liberada (falso)*/
 bool_t tecla_leer (gpioMap_t tecla);
 
-bool_t secuencia_retardo(delay_t* ptrDelay , controlSecuencia* ptrSecuencia);
+/* lee las teclas y configura la secuencia y el delay*/
+bool_t seteo_sentido_delay(delay_t* ptrDelay , controlSecuencia* ptrSecuencia);
 
 /* prende el led que cooresponde*/
-bool_t secuencia_activar(controlSecuencia* ptrSecuencia);
+bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia);
+
 /* atiende los errores*/
 void atenderError();
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/

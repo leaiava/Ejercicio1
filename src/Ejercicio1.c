@@ -44,11 +44,14 @@ int main( void )
 
 	// ----- Repeat for ever -------------------------
 	while( true ) {
-		if(secuencia_retardo(&myDelay ,  &Secuencias)){
-			// Acá entra cuando se cumple el tiempo del delay, sino se queda en el bucle del while
+
+		// seteo_sentido_delay devuelve siempre false hasta que se cumple el tiempo del delay y devuelve true
+		if(seteo_sentido_delay(&myDelay ,  &Secuencias)){
+			if( !secuencia_actualizar(&Secuencias) )
+				atenderError();
 			if( !led_apagar_todos(&Secuencias) )
 				atenderError();
-			if(!secuencia_activar(&Secuencias))
+			if( !led_encender(&Secuencias))
 				atenderError();
 		}
    }
@@ -58,14 +61,22 @@ int main( void )
    // case of a PC program.
    return 0;
 }
-
+/*
 bool_t led_encender( gpioMap_t ledx )
 {
+
 	//verifico que sea un led válido
 	if ( !( (ledx== LED1) || (ledx== LED2) || (ledx== LED3) || (ledx== LEDB) ) )
 		return 0;
 	else
 		return gpioWrite( ledx, ON );
+}
+*/
+bool_t led_encender( controlSecuencia* ptrSecuencia )
+{
+	if (ptrSecuencia == NULL)
+		return (false);
+	return gpioWrite( ptrSecuencia->ptrLed[ptrSecuencia->LedEncendido], ON );
 }
 
 bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
@@ -88,7 +99,7 @@ bool_t tecla_leer (gpioMap_t teclax)
 	return !gpioRead( teclax );
 }
 
-bool_t secuencia_retardo(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
+bool_t seteo_sentido_delay(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
 
 	if ( tecla_leer( TEC1 ) ){
 		ptrSecuencia->SentidoSecuencia = false;
@@ -106,7 +117,7 @@ bool_t secuencia_retardo(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
 }
 
 
-bool_t secuencia_activar(controlSecuencia* ptrSecuencia)
+bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia)
 {
 	if(ptrSecuencia == NULL)
 		return(false);
@@ -124,10 +135,6 @@ bool_t secuencia_activar(controlSecuencia* ptrSecuencia)
 		else
 			ptrSecuencia->LedEncendido++;
 	}
-
-	//Enciendo el led
-	if ( !led_encender(ptrSecuencia->ptrLed[ptrSecuencia->LedEncendido]))
-		return(false);
 
 	return(true);
 }
