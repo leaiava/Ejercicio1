@@ -23,7 +23,7 @@
 
 int main( void )
 {
-	controlSecuencia Secuencias;
+	static controlSecuencia Secuencias;
 	const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
 	delay_t myDelay;
 
