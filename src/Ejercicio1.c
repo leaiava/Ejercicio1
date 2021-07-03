@@ -13,12 +13,6 @@
 
 /*=====[Definition macros of private constants]==============================*/
 
-//#define encenderLed(ledx)	gpioWrite( ledx, ON )
-#define apagarLed(ledx)		gpioWrite( ledx, OFF )
-//#define leerTecla(teclax)	!gpioRead( teclax )
-
-const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
-
 /*=====[Definitions of extern global variables]==============================*/
 
 /*=====[Definitions of public global variables]==============================*/
@@ -27,68 +21,36 @@ const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
 
 /*=====[Main function, program entry point after power on or reset]==========*/
 
-
-
-
 int main( void )
 {
+	controlSecuencia Secuencias;
+	const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
+	delay_t myDelay;
+
+	// Inicializo mi estructura
+	Secuencias.ptrLed = secuenciaLeds;
+	Secuencias.LedEncendido = (sizeof(secuenciaLeds)/sizeof(gpioMap_t))-1;
+	Secuencias.LedMax = (sizeof(secuenciaLeds)/sizeof(gpioMap_t))-1;
+	Secuencias.SentidoSecuencia = false;
 
 	// ----- Setup -----------------------------------
 	boardInit();
+	delayConfig( &myDelay, 150 );
 
+	//TEC1 -> sentidoSecuencia =0 LEDA -> LED1 -> LED2 -> LED3 -> LEDA …
+	//TEC4 -> sentidoSecuencia =1 LED3 -> LED2 -> LED1 -> LEDA -> LED3 …
+	//TEC2 -> cada led queda encendido 150 ms.
+	//TEC3 -> cada led queda encendido 750 ms.
 
-	bool_t sentidoSecuencia = 0;
-
-		//TEC1 -> sentidoSecuencia =0 LEDA -> LED1 -> LED2 -> LED3 -> LEDA …
-		//TEC4 -> sentidoSecuencia =1 LED3 -> LED2 -> LED1 -> LEDA -> LED3 …
-    	//TEC2 -> ledTime = 0 cada led queda encendido 150 ms.
-    	//TEC3 -> ledTime = 1 cada led queda encendido 750 ms.
-
-    uint8_t indice=1;
-    delay_t myDelay;
-
-    delayConfig( &myDelay, 150 );
-    // ----- Repeat for ever -------------------------
-
-    while( true ) {
-    	if ( leerTecla( TEC1 ) ){
-    		sentidoSecuencia = 0;
-    	}
-
-    	if ( leerTecla( TEC2 ) ){
-    		delayWrite( &myDelay, 150 );
-    	}
-
-    	if ( leerTecla( TEC3 ) ){
-    		delayWrite( &myDelay, 750 );
-    	}
-
-    	if ( leerTecla( TEC4 ) ){
-    		sentidoSecuencia = 1;
-    	}
-
-    	//si se cumple el tiempo seteado con delayWrite cambio la secuencia de leds
-    	if(delayRead(&myDelay)){
-
-    		if( !apagarLeds() )
+	// ----- Repeat for ever -------------------------
+	while( true ) {
+		if(secuencia_retardo(&myDelay ,  &Secuencias)){
+			// Acá entra cuando se cumple el tiempo del delay, sino se queda en el bucle del while
+			if( !led_apagar_todos(&Secuencias) )
 				atenderError();
-
-    		//prendo el led correspondiente al indice según la secuencia definida
-    		if ( !encenderLed( secuenciaLeds[ indice ] ) )
+			if(!secuencia_activar(&Secuencias))
 				atenderError();
-
-
-    		if( sentidoSecuencia == 0)
-    			if (indice >= 3)
-    				indice = 0;
-    			else
-    				indice++;
-    		else
-    			if (indice <= 0)
-    				indice =3;
-    			else
-    				indice--;
-    	}
+		}
    }
 
    // YOU NEVER REACH HERE, because this program runs directly or on a
@@ -97,49 +59,81 @@ int main( void )
    return 0;
 }
 
-bool_t encenderLed( gpioMap_t ledx )
+bool_t led_encender( gpioMap_t ledx )
 {
-
-	//verifico que el led elegido sea un led válido
+	//verifico que sea un led válido
 	if ( !( (ledx== LED1) || (ledx== LED2) || (ledx== LED3) || (ledx== LEDB) ) )
 		return 0;
 	else
 		return gpioWrite( ledx, ON );
 }
 
-bool_t  apagarLeds()
+bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
 {
-	bool_t resp = FALSE;
-	resp =  apagarLed( LEDB );
-	resp &= apagarLed( LED1 );
-	resp &= apagarLed( LED2 );
-	resp &= apagarLed( LED3 );
-
-	// Leo todos los leds para verificar que están apagados. devuelve VERDADERO si estan todos apagados.
-	resp &= !gpioRead( LEDB );
-	resp &= !gpioRead( LED1 );
-	resp &= !gpioRead( LED2 );
-	resp &= !gpioRead( LED3 );
-
+	if(ptrSecuencia == NULL)
+		return(false);
+	bool_t resp = true;
+	for(int i = 0 ;i <= ptrSecuencia->LedMax; i++){
+		resp &= led_apagar( ptrSecuencia->ptrLed[ i ] );	//apago led
+		resp &= led_esta_apagado( ptrSecuencia->ptrLed[ i ] );	//verifico que se haya apagado
+	}
 	return(resp);
 }
 
-
-bool_t leerTecla (gpioMap_t teclax)
+bool_t tecla_leer (gpioMap_t teclax)
 {
+	//verifico que sea una tecla válida
 	if ( !( (teclax== TEC1) || (teclax== TEC2) || (teclax== TEC3) || (teclax== TEC4) ) )
 			return 0;
 	return !gpioRead( teclax );
 }
 
+bool_t secuencia_retardo(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
 
-bool_t atenderError()
-{
-	while(1);
-	return 0;
+	if ( tecla_leer( TEC1 ) ){
+		ptrSecuencia->SentidoSecuencia = false;
+	}
+	if ( tecla_leer( TEC4 ) ){
+		ptrSecuencia->SentidoSecuencia = true;
+	}
+	if ( tecla_leer( TEC2 ) ){
+		delayWrite( ptrDelay, 150 );
+	}
+	if ( tecla_leer( TEC3 ) ){
+		delayWrite( ptrDelay, 750 );
+	}
+	return (delayRead(ptrDelay));
 }
 
-void activarSecuencia(gpioMap_t * psecuencia)
-{
 
+bool_t secuencia_activar(controlSecuencia* ptrSecuencia)
+{
+	if(ptrSecuencia == NULL)
+		return(false);
+
+	//Antes de prender el led dependiendo de SentidoSecuencia ajusto LedEncendido
+	if(ptrSecuencia->SentidoSecuencia){
+		if (ptrSecuencia->LedEncendido <= 0)
+			ptrSecuencia->LedEncendido = ptrSecuencia->LedMax;
+		else
+			ptrSecuencia->LedEncendido--;
+	}
+	else{
+		if (ptrSecuencia->LedEncendido >= ptrSecuencia->LedMax)
+			ptrSecuencia->LedEncendido = 0;
+		else
+			ptrSecuencia->LedEncendido++;
+	}
+
+	//Enciendo el led
+	if ( !led_encender(ptrSecuencia->ptrLed[ptrSecuencia->LedEncendido]))
+		return(false);
+
+	return(true);
+}
+
+// No se implementa la atención del error, se deja colgado con el while(1)
+void atenderError()
+{
+	while(1);
 }

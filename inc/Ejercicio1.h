@@ -24,25 +24,33 @@ extern "C" {
 
 /*=====[Public function-like macros]=========================================*/
 
+#define led_apagar(ledx)	gpioWrite( ledx, OFF )
+#define led_esta_apagado(teclax)	!gpioRead( teclax )
+
 /*=====[Definitions of public data types]====================================*/
+
+typedef struct{
+	const gpioMap_t* ptrLed;//puntero al arreglo de led
+	uint8_t LedEncendido;//el led encendido en la secuencia
+	uint8_t LedMax;//cantidad maxima de leds
+	bool_t SentidoSecuencia;//el sentido q va la secuencia
+}controlSecuencia;
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
 
 /* encender un led en particular */
-bool_t encenderLed( gpioMap_t ledx );
-
+bool_t led_encender( gpioMap_t ledx );
 /* apagar todos los leds */
-bool_t  apagarLeds();
-
+bool_t led_apagar_todos(controlSecuencia* ptrSecuencia );
 /* leer el estado de una tecla.  Devuelve por valor el estado de la tecla pulsada (verdadero) o liberada (falso)*/
-bool_t leerTecla (gpioMap_t tecla);
+bool_t tecla_leer (gpioMap_t tecla);
 
-/* Loop infinito para colgar el programa en caso de error*/
-bool_t atenderError();
+bool_t secuencia_retardo(delay_t* ptrDelay , controlSecuencia* ptrSecuencia);
 
-/* psecuencia apunta a una secuencia de leds o arreglo de gpioMap_t */
-void activarSecuencia(gpioMap_t * psecuencia);
-
+/* prende el led que cooresponde*/
+bool_t secuencia_activar(controlSecuencia* ptrSecuencia);
+/* atiende los errores*/
+void atenderError();
 /*=====[Prototypes (declarations) of public interrupt functions]=============*/
 
 /*=====[C++ - end]===========================================================*/
