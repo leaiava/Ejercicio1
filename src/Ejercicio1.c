@@ -77,17 +77,7 @@ int main( void )
    // case of a PC program.
    return 0;
 }
-/*
-bool_t led_encender( gpioMap_t ledx )
-{
 
-	//verifico que sea un led válido
-	if ( !( (ledx== LED1) || (ledx== LED2) || (ledx== LED3) || (ledx== LEDB) ) )
-		return 0;
-	else
-		return gpioWrite( ledx, ON );
-}
-*/
 bool_t led_encender( controlSecuencia* ptrSecuencia )
 {
 	if (ptrSecuencia == NULL)
@@ -115,13 +105,13 @@ bool_t tecla_leer (gpioMap_t teclax)
 	return !gpioRead( teclax );
 }
 
-void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia1){
+void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia){
 
 	if ( tecla_leer( TEC1 ) ){
-		ptrSecuencia1->sentidoSecuencia = false;
+		ptrSecuencia->sentidoSecuencia = false;
 	}
 	if ( tecla_leer( TEC4 ) ){
-		ptrSecuencia1->sentidoSecuencia = true;
+		ptrSecuencia->sentidoSecuencia = true;
 	}
 }
 

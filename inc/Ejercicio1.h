@@ -51,7 +51,7 @@ bool_t tecla_leer (gpioMap_t tecla);
 bool_t seteo_delay(delay_t* ptrDelay);
 
 /*lee las teclas y setea el sentido de la secuencia*/
-void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia1);
+void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia);
 /* prende el led que cooresponde*/
 bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia);
 
