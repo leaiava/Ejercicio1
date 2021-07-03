@@ -23,15 +23,23 @@
 
 int main( void )
 {
-	static controlSecuencia Secuencias;
-	const gpioMap_t secuenciaLeds[]={LEDB, LED1, LED2, LED3};
+	controlSecuencia secuencia1;
+	controlSecuencia secuencia2;
+	const gpioMap_t secuenciaLeds1[]={LEDR, LEDG, LEDB };
+	const gpioMap_t secuenciaLeds2[]={LED1, LED2, LED3 };
 	delay_t myDelay;
 
-	// Inicializo mi estructura
-	Secuencias.ptrLed = secuenciaLeds;
-	Secuencias.LedEncendido = (sizeof(secuenciaLeds)/sizeof(gpioMap_t))-1;
-	Secuencias.LedMax = (sizeof(secuenciaLeds)/sizeof(gpioMap_t))-1;
-	Secuencias.SentidoSecuencia = false;
+	// Inicializo mi estructura1
+	secuencia1.ptrLed = secuenciaLeds1;
+	secuencia1.ledEncendido = (sizeof(secuenciaLeds1)/sizeof(gpioMap_t))-1;
+	secuencia1.ultimoLed = (sizeof(secuenciaLeds1)/sizeof(gpioMap_t))-1;
+	secuencia1.sentidoSecuencia = false;
+
+	// Inicializo mi estructura2
+	secuencia2.ptrLed = secuenciaLeds2;
+	secuencia2.ledEncendido = (sizeof(secuenciaLeds2)/sizeof(gpioMap_t))-1;
+	secuencia2.ultimoLed = (sizeof(secuenciaLeds2)/sizeof(gpioMap_t))-1;
+	secuencia2.sentidoSecuencia = false;
 
 	// ----- Setup -----------------------------------
 	boardInit();
@@ -45,13 +53,21 @@ int main( void )
 	// ----- Repeat for ever -------------------------
 	while( true ) {
 
-		// seteo_sentido_delay devuelve siempre false hasta que se cumple el tiempo del delay y devuelve true
-		if(seteo_sentido_delay(&myDelay ,  &Secuencias)){
-			if( !secuencia_actualizar(&Secuencias) )
+		seteo_sentidoSecuencia( &secuencia1 );
+		seteo_sentidoSecuencia( &secuencia2 );
+		// seteo_delay devuelve siempre false hasta que se cumple el tiempo del delay y devuelve true
+		if( seteo_delay(&myDelay) ){
+			if( !secuencia_actualizar( &secuencia1 ) )
 				atenderError();
-			if( !led_apagar_todos(&Secuencias) )
+			if( !secuencia_actualizar( &secuencia2 ) )
 				atenderError();
-			if( !led_encender(&Secuencias))
+			if( !led_apagar_todos(&secuencia1) )
+				atenderError();
+			if( !led_apagar_todos(&secuencia2) )
+				atenderError();
+			if( !led_encender(&secuencia1))
+				atenderError();
+			if( !led_encender(&secuencia2))
 				atenderError();
 		}
    }
@@ -76,7 +92,7 @@ bool_t led_encender( controlSecuencia* ptrSecuencia )
 {
 	if (ptrSecuencia == NULL)
 		return (false);
-	return gpioWrite( ptrSecuencia->ptrLed[ptrSecuencia->LedEncendido], ON );
+	return gpioWrite( ptrSecuencia->ptrLed[ptrSecuencia->ledEncendido], ON );
 }
 
 bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
@@ -84,7 +100,7 @@ bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
 	if(ptrSecuencia == NULL)
 		return(false);
 	bool_t resp = true;
-	for(int i = 0 ;i <= ptrSecuencia->LedMax; i++){
+	for(int i = 0 ;i <= ptrSecuencia->ultimoLed; i++){
 		resp &= led_apagar( ptrSecuencia->ptrLed[ i ] );	//apago led
 		resp &= led_esta_apagado( ptrSecuencia->ptrLed[ i ] );	//verifico que se haya apagado
 	}
@@ -99,14 +115,18 @@ bool_t tecla_leer (gpioMap_t teclax)
 	return !gpioRead( teclax );
 }
 
-bool_t seteo_sentido_delay(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
+void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia1){
 
 	if ( tecla_leer( TEC1 ) ){
-		ptrSecuencia->SentidoSecuencia = false;
+		ptrSecuencia1->sentidoSecuencia = false;
 	}
 	if ( tecla_leer( TEC4 ) ){
-		ptrSecuencia->SentidoSecuencia = true;
+		ptrSecuencia1->sentidoSecuencia = true;
 	}
+}
+
+bool_t seteo_delay(delay_t* ptrDelay){
+
 	if ( tecla_leer( TEC2 ) ){
 		delayWrite( ptrDelay, 150 );
 	}
@@ -116,24 +136,23 @@ bool_t seteo_sentido_delay(delay_t* ptrDelay , controlSecuencia* ptrSecuencia){
 	return (delayRead(ptrDelay));
 }
 
-
 bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia)
 {
 	if(ptrSecuencia == NULL)
 		return(false);
 
-	//Antes de prender el led dependiendo de SentidoSecuencia ajusto LedEncendido
-	if(ptrSecuencia->SentidoSecuencia){
-		if (ptrSecuencia->LedEncendido <= 0)
-			ptrSecuencia->LedEncendido = ptrSecuencia->LedMax;
+	//Antes de prender el led dependiendo de sentidoSecuencia ajusto ledEncendido
+	if(ptrSecuencia->sentidoSecuencia){
+		if (ptrSecuencia->ledEncendido <= 0)
+			ptrSecuencia->ledEncendido = ptrSecuencia->ultimoLed;
 		else
-			ptrSecuencia->LedEncendido--;
+			ptrSecuencia->ledEncendido--;
 	}
 	else{
-		if (ptrSecuencia->LedEncendido >= ptrSecuencia->LedMax)
-			ptrSecuencia->LedEncendido = 0;
+		if (ptrSecuencia->ledEncendido >= ptrSecuencia->ultimoLed)
+			ptrSecuencia->ledEncendido = 0;
 		else
-			ptrSecuencia->LedEncendido++;
+			ptrSecuencia->ledEncendido++;
 	}
 
 	return(true);

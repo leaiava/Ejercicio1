@@ -31,9 +31,9 @@ extern "C" {
 
 typedef struct{
 	const gpioMap_t* ptrLed;//puntero al arreglo de leds
-	uint8_t LedEncendido;//el led encendido en la secuencia
-	uint8_t LedMax;//cantidad maxima de leds
-	bool_t SentidoSecuencia;//el sentido q va la secuencia
+	uint8_t ledEncendido;//el led encendido en la secuencia
+	uint8_t ultimoLed;//numero del último led del array
+	bool_t sentidoSecuencia;//el sentido q va la secuencia
 }controlSecuencia;
 
 /*=====[Prototypes (declarations) of public functions]=======================*/
@@ -47,9 +47,11 @@ bool_t led_apagar_todos(controlSecuencia* ptrSecuencia );
 /* leer el estado de una tecla.  Devuelve por valor el estado de la tecla pulsada (verdadero) o liberada (falso)*/
 bool_t tecla_leer (gpioMap_t tecla);
 
-/* lee las teclas y configura la secuencia y el delay*/
-bool_t seteo_sentido_delay(delay_t* ptrDelay , controlSecuencia* ptrSecuencia);
+/* lee las teclas y configura el delay*/
+bool_t seteo_delay(delay_t* ptrDelay);
 
+/*lee las teclas y setea el sentido de la secuencia*/
+void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia1);
 /* prende el led que cooresponde*/
 bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia);
 
