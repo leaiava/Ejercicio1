@@ -1,5 +1,16 @@
 # Ejercicio1
 
+## Autores ✒️
+
+_Este firmware tiene dos integrantes:_
+
+* **L.Arrieta** - (https://github.com/leaiava)
+* **J.Cagua** - (https://github.com/jonathancagua)
+
+### Pre-requisitos 📋
+- [Firmware V3](https://github.com/epernia/firmware_v3).
+- [Utilización básica de firmware_v3](https://github.com/epernia/firmware_v3/blob/master/documentation/firmware/usage/usage-es.md).
+
 ## Objetivo:
 Realizar modificaciones al ejercicio 0 para incorporar buenas prácticas de programación.
 
@@ -48,3 +59,8 @@ Una estructura posible puede ser la siguiente:
 
 Ustedes pueden definir la estructura que crean más conveniente con la debida documentación en el código (comentarios)
 
+## Expresiones de Gratitud 🎁
+
+* Comenta a otros sobre este proyecto 📢
+* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
+* etc.
