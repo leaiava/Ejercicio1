@@ -57,17 +57,17 @@ int main( void )
 		seteo_sentidoSecuencia( &secuencia2 );
 		// seteo_delay devuelve siempre false hasta que se cumple el tiempo del delay y devuelve true
 		if( seteo_delay(&myDelay) ){
-			if( !secuencia_actualizar( &secuencia1 ) )
+			if( !activarSecuencia( &secuencia1 ) )
 				atenderError();
-			if( !secuencia_actualizar( &secuencia2 ) )
+			if( !activarSecuencia( &secuencia2 ) )
 				atenderError();
-			if( !led_apagar_todos(&secuencia1) )
+			if( !apagarLeds(&secuencia1) )
 				atenderError();
-			if( !led_apagar_todos(&secuencia2) )
+			if( !apagarLeds(&secuencia2) )
 				atenderError();
-			if( !led_encender(&secuencia1))
+			if( !encenderLed(&secuencia1))
 				atenderError();
-			if( !led_encender(&secuencia2))
+			if( !encenderLed(&secuencia2))
 				atenderError();
 		}
    }
@@ -78,14 +78,14 @@ int main( void )
    return 0;
 }
 
-bool_t led_encender( controlSecuencia* ptrSecuencia )
+bool_t encenderLed( controlSecuencia* ptrSecuencia )
 {
 	if (ptrSecuencia == NULL)
 		return (false);
 	return gpioWrite( ptrSecuencia->ptrLed[ptrSecuencia->ledEncendido], ON );
 }
 
-bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
+bool_t apagarLeds(controlSecuencia* ptrSecuencia )
 {
 	if(ptrSecuencia == NULL)
 		return(false);
@@ -97,7 +97,7 @@ bool_t led_apagar_todos(controlSecuencia* ptrSecuencia )
 	return(resp);
 }
 
-bool_t tecla_leer (gpioMap_t teclax)
+bool_t leerTecla (gpioMap_t teclax)
 {
 	//verifico que sea una tecla válida
 	if ( !( (teclax== TEC1) || (teclax== TEC2) || (teclax== TEC3) || (teclax== TEC4) ) )
@@ -107,31 +107,31 @@ bool_t tecla_leer (gpioMap_t teclax)
 
 void seteo_sentidoSecuencia( controlSecuencia* ptrSecuencia){
 
-	if ( tecla_leer( TEC1 ) ){
+	if ( leerTecla( TEC1 ) ){
 		ptrSecuencia->sentidoSecuencia = false;
 	}
-	if ( tecla_leer( TEC4 ) ){
+	if ( leerTecla( TEC4 ) ){
 		ptrSecuencia->sentidoSecuencia = true;
 	}
 }
 
 bool_t seteo_delay(delay_t* ptrDelay){
 
-	if ( tecla_leer( TEC2 ) ){
+	if ( leerTecla( TEC2 ) ){
 		delayWrite( ptrDelay, 150 );
 	}
-	if ( tecla_leer( TEC3 ) ){
+	if ( leerTecla( TEC3 ) ){
 		delayWrite( ptrDelay, 750 );
 	}
 	return (delayRead(ptrDelay));
 }
 
-bool_t secuencia_actualizar(controlSecuencia* ptrSecuencia)
+bool_t activarSecuencia(controlSecuencia* ptrSecuencia)
 {
 	if(ptrSecuencia == NULL)
 		return(false);
 
-	//Antes de prender el led dependiendo de sentidoSecuencia ajusto ledEncendido
+	//Ajusto el led que se tiene que encender de acuerdo al led que estaba prendido y al sentido de la secuencia
 	if(ptrSecuencia->sentidoSecuencia){
 		if (ptrSecuencia->ledEncendido <= 0)
 			ptrSecuencia->ledEncendido = ptrSecuencia->ultimoLed;
